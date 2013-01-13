@@ -1,0 +1,171 @@
+*{
+	padding:0px; 
+	margin:0px;
+}
+body{
+	background-color: DarkGray;
+}
+#wrapper{
+	width: 800px;
+	position:absolute;
+	top:0px;
+	margin-top: 50px;
+}
+
+#heading{ 
+	width:800px; 
+	height:60px; 
+	/*margin-left: 100px; 
+	margin-top:10px;*/
+	padding-top:10px; 
+	background-image:url("images/frais_icon.png"); 
+	background-repeat: no-repeat; 
+	background-position: 0px 0px; 
+	text-align:center; 
+	background-color:#eee; 
+	color: #19A5D5;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}        
+    
+#navBar{ 
+	width:800px; 
+	height:60px; 
+	/*margin-left:100px;*/ 
+	background-color:#ddd;
+}
+
+.layer_loader{ 
+	width: auto; 
+	height:20px; 
+	margin: 5px; 
+	color: black; 
+	border:solid 1px black; 
+	font-family:Arial, Helvetica, sans-serif; 
+	font-weight:bold; 
+	background-color: rgb(27,165,229); 
+	cursor:pointer;
+}
+
+.navBarSelect{ 
+	width: auto; 
+	height:20px; 
+	padding:0; 
+	margin: 5px; 
+	color: black; 
+	font-family:Arial, Helvetica, sans-serif; 
+	font-weight:bold; 
+	background-color: rgb(27,165,229); 
+	border:0px; 
+	cursor:pointer;
+}
+
+#navBarProjectTaskSelect{ 
+	width: auto; 
+	height:20px; 
+	padding:0; 
+	margin: 5px; 
+	color: black; 
+	font-family:Arial, Helvetica, sans-serif; 
+	font-weight:bold; 
+	background-color: rgb(27,165,229); 
+	border:0px; 
+	cursor:pointer;
+}
+
+.point_loader{ 
+	width: auto; 
+	height:20px; 
+	margin: 5px; 
+	color: black; 
+	border:solid 1px black; 
+	font-family:Arial, Helvetica, sans-serif; 
+	font-weight:bold; 
+	background-color: rgb(27,165,229); 
+	cursor:pointer;
+}
+
+.pointInfoInput{
+	background-color: rgb(40,200,0); 
+	font-family: Arial, Helvetica, sans-serif; 
+	font-weight:bold; 
+	width: 150px;
+}
+
+.navBarList{
+	width:600px; 
+	display:inline
+}
+
+.navBarList li{
+	list-style:none; 
+	display:inline;
+
+}
+
+#main{
+	width:800px; 
+	min-height:600px; 
+	/*margin-left:100px;*/ 
+	margin-top:0px; 
+	background-color:#ccc; 
+	background-position:center; 
+	background-repeat: no-repeat; 
+	text-align:center
+}
+
+.mainList{ 
+	margin:auto;
+	padding:10px 10px 10px 10px;
+	list-style:none; 
+	text-align:left; 
+	font-weight:normal; 
+	font-family:Arial, Helvetica, sans-serif; 
+	background-color:#ddd;
+}
+
+.mainList li{
+	padding:5px; 
+	background-color:#ddd;
+}
+
+.listHeader{
+	font-weight:bold; 
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.mainButton{
+	width:auto; margin:auto; 
+	margin-left:5px; 
+	background-color:rgb(27,165,229); 
+	border: 1px solid black; 
+	font-weight:bold; 
+	font-family:Arial, Helvetica, sans-serif; 
+	cursor:pointer;
+}
+
+.mainSelect{
+	width: auto; 
+	height:20px; 
+	padding:0; 
+	margin: 5px; 
+	color: black; 
+	font-family:Arial, Helvetica, sans-serif; 
+	font-weight:normal; 
+	background-color: rgb(27,165,229); 
+	border:0px; 
+	cursor:pointer;
+}
+
+#navBarResetButton{
+	background-color:rgb(27,165,229); 
+	border:solid 1px black;
+	cursor:pointer;
+	display:inline;
+	font-weight:bold;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+/*#display_layer1{ position:absolute; left:100px; top:100px; padding:0px; background-color: green; }
+*/
