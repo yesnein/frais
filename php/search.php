@@ -453,8 +453,15 @@
 	echo"FRAIS.layers[1].loadSearchLayer(FRAIS.layers[1]);";
 	//load the layer for the zoom view of the search results
 	echo"FRAIS.layers[2].loadSearchLayer(FRAIS.layers[2]);";
-	//create the legend for the search results
+	//create the text description for the search results
 	echo"if(typeof(FRAIS.createTextDescription)==\"function\")FRAIS.createTextDescription();";
+
+	
+	echo"$(\"main\").style.backgroundColor=\"white\";";
+	
+	echo"var clearer = document.createElement(\"div\");";
+	echo"clearer.style.clear=\"both\";";
+	echo"$(\"main\").appendChild(clearer);";
 	
   }else{
   	//show that a way could not be found

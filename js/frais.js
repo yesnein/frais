@@ -5,12 +5,12 @@
 
 window.onload = function(){
 	wrapper = $("wrapper");	
-	wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
+	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
 
 }
 window.onresize = function(){
 	wrapper = $("wrapper");
-	wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
+	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
 }
 /////////////
 // Facility Routing and Information System - FRAIS 
@@ -555,8 +555,13 @@ FRAIS.Layer.prototype.loadSearchResults = function(that){
 		" 400 300";
 		
 		that.SVGDoc.documentElement.setAttributeNS(null, "viewBox", viewBox);
-		that.elem.style.left=(0 + (that.layer_position-1)*20)+"px";
-		that.elem.style.top=(730 + that.layer_position*20)+"px";
+		//that.elem.style.left=(0 + (that.layer_position-1)*20)+"px";
+		//that.elem.style.top=(0 + that.layer_position*0)+"px";
+		that.elem.style.borderTop="20px solid white";
+		//that.elem.style.marginLeft="20px";
+		that.elem.style.backgroundColor="rgb(240,240,240)";
+		that.elem.style.position="static";
+		that.elem.style.cssFloat="left";
 		that.elem.style.width = "400px";
 		that.elem.style.height = "300px";
 		that.elem.style.overflow = "hidden";
@@ -663,7 +668,7 @@ FRAIS.Layer.prototype.loadLayer= function(that){
 	if(FRAIS.layerMode !="overview")that.fp_loader_item.style.display="";
 	that.layer_position=++FRAIS.displayed_layers;
 	that.elem.style.left=(0 + (that.layer_position-1)*20)+"px";
-	that.elem.style.top=(110 + that.layer_position*20)+"px";
+	that.elem.style.top=(0 + (that.layer_position-1)*20)+"px";
 	that.elem.style.zIndex = that.layer_position*10;
 	that.elem.style.backgroundColor = "rgb("+(255-that.layer_position*15)+","+(255-that.layer_position*15)+","+(255-that.layer_position*15)+")";
 	that.label.style.backgroundColor = "rgb("+(255-that.layer_position*15)+","+(255-that.layer_position*15)+","+(255-that.layer_position*15)+")";
@@ -803,8 +808,8 @@ FRAIS.Layer.prototype.unloadLayer= function(that){
 	for(var i= that.layer_position+1;i <= FRAIS.displayed_layers;i++){
 		var thisLayer=FRAIS.getLayerByPosition(i);
 			thisLayer.layer_position--;
-			thisLayer.elem.style.left=(80 + thisLayer.layer_position*20)+"px";
-			thisLayer.elem.style.top=(110 + thisLayer.layer_position*20)+"px";
+			thisLayer.elem.style.left=(0 + (thisLayer.layer_position-1)*20)+"px";
+			thisLayer.elem.style.top=(0 + (thisLayer.layer_position-1)*20)+"px";
 			thisLayer.elem.style.zIndex = thisLayer.layer_position*10;
 			thisLayer.elem.style.backgroundColor = "rgb("+(255-thisLayer.layer_position*15)+","+(255-thisLayer.layer_position*15)+","+(255-thisLayer.layer_position*15)+")";
 			thisLayer.label.style.backgroundColor = "rgb("+(255-thisLayer.layer_position*15)+","+(255-thisLayer.layer_position*15)+","+(255-thisLayer.layer_position*15)+")";
@@ -822,8 +827,9 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 	that.point_loader_item.style.display="";
 	if(FRAIS.layerMode !="overview")that.fp_loader_item.style.display="";
 	that.layer_position=1;//++FRAIS.displayed_layers;
-	that.elem.style.left=(0 + (that.layer_position-1)*20)+"px";
-	that.elem.style.top=(110 + that.layer_position*20)+"px";
+	//that.elem.style.left=(0 + (that.layer_position-1)*20)+"px";
+	//that.elem.style.top=(0 + that.layer_position*0)+"px";
+	that.elem.style.position="static";
 	that.elem.style.zIndex = that.layer_position*10;
 	that.elem.style.backgroundColor = "rgb("+(255-that.layer_position*15)+","+(255-that.layer_position*15)+","+(255-that.layer_position*15)+")";
 	that.label.style.backgroundColor = "rgb("+(255-that.layer_position*15)+","+(255-that.layer_position*15)+","+(255-that.layer_position*15)+")";
@@ -2383,12 +2389,16 @@ FRAIS.showFloorPointInfo= function(e){
 		popup.appendChild(document.createTextNode("X: " +(posX)));
 		popup.appendChild(document.createElement("br"));
 		popup.appendChild(document.createTextNode("Y: " +(posY)));
-		document.body.appendChild(popup);
+		//document.body.appendChild(popup);
+		if($("main") != null){
+			$("main").appendChild(popup);
+		}
 }
 //Function for removing the infobox of a floorpoint  
 FRAIS.hideFloorPointInfo= function(){
-	if($("FPpopup")!=null)
-		document.body.removeChild($("FPpopup"));
+	if($("FPpopup") != null){
+		$("main").removeChild($("FPpopup"));
+	}
 }
 //Function for removing a floorpoint from a floorplan element
 FRAIS.removeFloorPoint= function(e){
@@ -2657,8 +2667,8 @@ FRAIS.showInfo=function(e){
 	var popup= document.createElement("div");
 		popup.id="popup";
 		popup.style.position="absolute";
-		popup.style.left= (e.pageX+40)+"px";//+((FRAIS.wayPoints[e.currentTarget.getAttributeNS(null,"id")].layer-1)*20))+"px";
-		popup.style.top=  (e.pageY+40)+"px";//+((FRAIS.wayPoints[e.currentTarget.getAttributeNS(null,"id")].layer-1)*20))+"px";
+		popup.style.left= (e.pageX + 40) + "px";//+((FRAIS.wayPoints[e.currentTarget.getAttributeNS(null,"id")].layer-1)*20))+"px";
+		popup.style.top=  (e.pageY + 40) + "px";//+((FRAIS.wayPoints[e.currentTarget.getAttributeNS(null,"id")].layer-1)*20))+"px";
 		//popup.style.left= (parseInt(e.currentTarget.getAttributeNS(null,"cx"))+40)+"px";
 		//popup.style.top= (parseInt(e.currentTarget.getAttributeNS(null,"cy"))+40)+"px";
 		popup.style.zIndex=1000;
@@ -2674,12 +2684,16 @@ FRAIS.showInfo=function(e){
 		popup.appendChild(document.createTextNode("X: " +(posX)));
 		popup.appendChild(document.createElement("br"));
 		popup.appendChild(document.createTextNode("Y: " +(posY)));
-		document.body.appendChild(popup);
+		
+		//document.body.appendChild(popup);
+		if($("main") != null){
+			$("main").appendChild(popup);
+		}
 }
 //Function for removing the info box of a waypoint
 FRAIS.hideInfo= function(){
 	if($("popup")!=null)
-		document.body.removeChild($("popup"));
+		$("main").removeChild($("popup"));
 }
 // Function for deselecting a waypoint
 FRAIS.deactivatePoint= function(e){
@@ -2751,7 +2765,7 @@ FRAIS.selectPoint= function(e){
 		pointInfo.id = "pointInfo"
 		pointInfo.name = "pointInfo"
 		pointInfo.style.position = "absolute";
-		pointInfo.style.left = (left + parseInt($("SVGObject" + FRAIS.activeLayer.id).width.match(/[0-9]+/g)) + 10) + "px";
+		pointInfo.style.left = (left + parseInt($("SVGObject" + FRAIS.activeLayer.id).width.match(/[0-9]+/g)) + 20) + "px";
 		pointInfo.style.top = top + "px";
 		pointInfo.width = "auto";
 		pointInfo.style.zIndex = FRAIS.layers[FRAIS.activeLayer.id].elem.style.zIndex;

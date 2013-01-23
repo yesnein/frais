@@ -38,10 +38,10 @@ require_once ("config.inc.php");
 	$text="FRAIS.createTextDescription= function(){
 			if(document.getElementById(\"main\")!=null){
 				var descDiv=document.createElement(\"div\");
-					descDiv.style.position=\"absolute\"
-					descDiv.style.top=\"750px\";
-					descDiv.style.left=\"420px\";
 					descDiv.style.width=\"380px\";
+					descDiv.style.padding=\"20px 0px 0px 20px\";
+					descDiv.style.cssFloat=\"right\";
+					descDiv.style.backgroundColor=\"white\";
 					descDiv.style.zIndex=\"10\";
 					
 				var descList=document.createElement(\"ul\");

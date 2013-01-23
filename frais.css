@@ -4,12 +4,15 @@
 }
 body{
 	background-color: DarkGray;
+	background-image: url("images/frais_bg2.png");
 }
 #wrapper{
 	width: 800px;
-	position:absolute;
+	padding: 20px;
+	background-color: white;
+	position: relative;
 	top:0px;
-	margin-top: 50px;
+	margin: 50px auto 50px auto;
 }
 
 #heading{ 
@@ -20,15 +23,38 @@ body{
 	padding-top:10px; 
 	background-image:url("images/frais_icon.png"); 
 	background-repeat: no-repeat; 
-	background-position: 0px 0px; 
-	text-align:center; 
+	background-position: 1% 50%; 
+	text-align:left;
+	text-indent: 70px; 
 	background-color:#eee; 
 	color: #19A5D5;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size: 36px;
-	text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+	text-shadow: 2px 2px 2px rgb(0,0,0);
 }        
-    
+
+#footer{
+	width: 800px;
+	margin: 0px auto 0px auto;
+	text-align: right;
+	color: #19A5D5;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	text-shadow: 2px 2px 2px rgb(0,0,0);	
+}
+
+#footer a{
+	text-decoration: none;
+	color: #CCCCCC;
+	background-color: white;	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 32px;
+	text-shadow: 2px 2px 2px rgb(0,0,0);
+}
+  
+#footer a:hover{
+ 	color: #19A5D5;
+}  
 #navBar{ 
 	width:800px; 
 	height:60px; 
@@ -107,6 +133,7 @@ body{
 #main{
 	width:800px; 
 	min-height:600px; 
+	position: relative;
 	/*margin-left:100px;*/ 
 	margin-top:0px; 
 	background-color:#ccc; 
