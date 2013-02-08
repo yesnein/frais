@@ -2,9 +2,17 @@
  * @author Max Noja
  * @date 04.03.2010
  */
-
+/*
 window.onload = function(){
-	wrapper = $("wrapper");	
+	wrapper = $("wrapper");
+		
+	var now = new Date()
+	if(now.getFullYear() <= 2010) {
+		$('#copyright_year').text("" + 2010);
+	}
+	else{
+		$('#copyright_year').text("" + 2010 + " \u2013 " + now.getFullYear());
+	}
 	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
 
 }
@@ -12,6 +20,7 @@ window.onresize = function(){
 	wrapper = $("wrapper");
 	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
 }
+*/
 /////////////
 // Facility Routing and Information System - FRAIS 
 /////////////
