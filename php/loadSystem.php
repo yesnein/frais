@@ -28,7 +28,6 @@ require_once ("config.inc.php");
 	var navBarSelectItemA=document.createElement("li");
 		navBarSelectItemA.id="navBarSelectItemA";
 
-
 	var navBarSelectA=document.createElement("select");
 		navBarSelectA.name="navBarSelectA";
 		navBarSelectA.id="navBarSelectA";

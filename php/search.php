@@ -221,7 +221,7 @@
 		$legend_sql="SELECT h.beschreibung hbeschreibung, h.haus_id, e.beschreibung ebeschreibung, e.ebene_id  FROM ebene e, haus h WHERE e.haus_id=h.haus_id AND $levels AND $buildings;";
 		
 		$legend_result=mysql_query ( $legend_sql , $db);
-		
+			
 		//Create a javascript function to create a legend for the output on the client-side
 		if($legend_result){
 			$legend=" FRAIS.createLegend= function(SVGDoc){
@@ -325,6 +325,7 @@
 						defs.appendChild(symbol);
 					}
 				};";
+				
 		echo $legend;
 		/*	$legend=$legend."<symbol id=\"legend\">
 								<rect x=\"5\" y=\"5\" width=\"180\" height=\"".(mysql_num_rows($legend_result)*30+50)."\" stroke=\"black\" stroke-opacity=\"0.5\" stroke-width=\"1px\" fill=\"white\" fill-opacity=\"0.5\"/>
@@ -403,7 +404,7 @@
 		//Create one layer for displaying all waypoints and floorplans and one layer for displaying the zoom view
 		echo"FRAIS.layers[1] = new FRAIS.Layer(1,0,0,\"\",$layerScale,$layerWidth,$layerHeight,$minX-10,$minY-10);";
 		echo"FRAIS.layers[2] = new FRAIS.Layer(2,0,0,\"\",$layerScale,$layerWidth,$layerHeight,$minX-10,$minY-10);";
-		
+
 		//Create the waypoints of the shortest path 
 		if($waypoints_result){
 		for($i=0;$i< mysql_num_rows($waypoints_result);$i++){
@@ -422,11 +423,17 @@
    			$neighbours_result = mysql_query ( $neighbours_sql , $db); 
 	  	
 			echo"FRAIS.wayPoints[parseInt($wpID)]=new FRAIS.WayPoint($wpX,$wpY,$wpID,\"$wpType\",\"$wpDesc\",$wpDest,$wpLevel,$wpBuilding,$wpProject,1";
-			if($neighbours_result){for($j=0;$j< mysql_num_rows($neighbours_result);$j++){echo ",".mysql_result($neighbours_result,$j,"wp_id");;}}
+			if($neighbours_result){
+				for($j=0;$j< mysql_num_rows($neighbours_result);$j++){
+					echo ",".mysql_result($neighbours_result,$j,"wp_id");
+				}
+			}
 			echo");";
+			
 			echo"FRAIS.layers[1].wayPoints[FRAIS.layers[1].wayPointsCount++]= $wpID;";
 			echo"FRAIS.layers[2].wayPoints[FRAIS.layers[2].wayPointsCount++]= $wpID;";
 		}
+	  
 		//Create the floorplans
 		if($floorplans_result){
 			for($i=0;$i< mysql_num_rows($floorplans_result);$i++){
@@ -445,6 +452,7 @@
 	}
 		
 	}
+
 	//Create the text description of the search results
 	require_once("createTextDescription.php");
 	//Switch the layer mode to overview
@@ -457,11 +465,11 @@
 	echo"if(typeof(FRAIS.createTextDescription)==\"function\")FRAIS.createTextDescription();";
 
 	
-	echo"$(\"main\").style.backgroundColor=\"white\";";
+	echo"$(\"#main\").get(0).style.backgroundColor=\"white\";";
 	
 	echo"var clearer = document.createElement(\"div\");";
 	echo"clearer.style.clear=\"both\";";
-	echo"$(\"main\").appendChild(clearer);";
+	echo"$(\"#main\").get(0).appendChild(clearer);";
 	
   }else{
   	//show that a way could not be found

@@ -16,11 +16,23 @@ window.onload = function(){
 	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
 
 }
+
 window.onresize = function(){
 	wrapper = $("wrapper");
 	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
 }
 */
+
+$(document).ready(function(){
+	var now = new Date()
+	if(now.getFullYear() <= 2010) {
+		$('#copyright_year').text("" + 2010);
+	}
+	else{
+		$('#copyright_year').text("" + 2010 + " \u2013 " + now.getFullYear());
+	}
+
+});
 /////////////
 // Facility Routing and Information System - FRAIS 
 /////////////
@@ -145,9 +157,9 @@ FRAIS.Layer= function(id,level,floor,desc,scale,width,height,refX,refY){
 	this.layer_loader.addEventListener("click",function(){that.loadLayer(that)},false);
 	
 	this.layer_loader_item.appendChild(this.layer_loader);
-
-	if($("navBarListE")!=null)
-		$("navBarListE").appendChild(this.layer_loader_item);
+	
+	if($("#navBarListE").length != 0)
+		$("#navBarListE").get(0).appendChild(this.layer_loader_item);
 	
 	//List-item with button for displaying the waypoints of the layer
 	this.point_loader_item = document.createElement("li");
@@ -163,8 +175,8 @@ FRAIS.Layer= function(id,level,floor,desc,scale,width,height,refX,refY){
 	
 	this.point_loader_item.appendChild(this.point_loader);
 	
-	if($("navBarListE")!=null)
-		$("navBarListE").appendChild(this.point_loader_item);
+	if($("#navBarListE").length != 0)
+		$("#navBarListE").get(0).appendChild(this.point_loader_item);
 	
 	//List-item with button for displaying the floorplan image of the layer
 	this.fp_loader_item = document.createElement("li");
@@ -180,10 +192,10 @@ FRAIS.Layer= function(id,level,floor,desc,scale,width,height,refX,refY){
 	
 	this.fp_loader_item.appendChild(this.fp_loader);
 	
-	if($("navBarListE")!=null)
-		$("navBarListE").appendChild(this.fp_loader_item);
+	if($("#navBarListE").length != 0)
+		$("#navBarListE").get(0).appendChild(this.fp_loader_item);
 	
-	$("main").appendChild(this.elem);
+	$("#main").get(0).appendChild(this.elem);
 	//Variable for the DOM-element of the SVG document of the layer
 	this.SVGDoc=null;
 	//Variable for the floorplan image of the layer
@@ -854,18 +866,17 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 	
 	that.elem.style.display="";
 	
-	
 	if (that.SVGDoc == null) {
 		
-
+		
 		var SVGtimer=setInterval(function(){
 			
-			if (typeof($("SVGObject" + that.id).getSVGDocument) == "function") {
-				
-				if ($("SVGObject" + that.id) != null && $("SVGObject" + that.id).getSVGDocument()!=null) {
+			if (typeof($("#SVGObject" + that.id).get(0).getSVGDocument) == "function") {
+						
+				if ($("#SVGObject" + that.id).length && $("#SVGObject" + that.id).get(0).getSVGDocument()!=null) {
 					
 					//while (that.SVGDoc == null) {
-						that.SVGDoc = $("SVGObject" + that.id).getSVGDocument();
+						that.SVGDoc = $("#SVGObject" + that.id).get(0).getSVGDocument();
 					//}
 					if (that.SVGDoc != null) {	
 						clearInterval(SVGtimer);			
@@ -875,9 +886,9 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 					}
 				}
 			}
-			else if (typeof($("SVGObject" + that.id).contentDocument) == "function") {
-				
-				if ($("SVGObject" + that.id) != null && $("SVGObject" + that.id).contentDocument!=null) {
+			else if (typeof($("#SVGObject" + that.id).get(0).contentDocument) == "function") {
+
+				if ($("#SVGObject" + that.id).length && $("#SVGObject" + that.id).get(0).contentDocument!=null) {
 					
 					//while (that.SVGDoc == null) {
 						that.SVGDoc = that.SVGObject.contentDocument;
@@ -885,7 +896,7 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 					
 					if (that.SVGDoc != null) {	
 						clearInterval(SVGtimer);			
-						if (FRAIS.layerMode == "overview") {
+						if (FRAIS.layerMode == "overview") {							
 							that.loadSearchResults(that);
 						}
 					}
@@ -912,7 +923,7 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 			
 			if (FRAIS.layerMode == "overview") {
 				//that.SVGDoc.documentElement.addEventListener("click", FRAIS.deactivatePoint, false);
-				//that.SVGDoc.documentElement.addEventListener("click", FRAIS.deactivatePoint, false);
+				//that.SVGDoc.documentElement.addEventListener("click", FRAIS.deactivatePoint, false);				
 				that.loadSearchResults(that);
 				//that.loadPoints(that);
 			}
@@ -1792,8 +1803,8 @@ FRAIS.resetNavBar= function(){
 }
 //Function to clear the main DIV of the FRAIS
 FRAIS.resetMain= function(){
-	if($("main")!=null){
-		var main=$("main");
+	if($("#main")!=null){
+		var main=$("#main").get(0);
 
 		while(main.childNodes.length > 0){
 			main.removeChild(main.firstChild);
@@ -3231,49 +3242,62 @@ FRAIS.hideUpdatePoint = function(){
 //Function for loading the nav bar for a search
 FRAIS.loadNavBar= function(){
 
-	var MyAjax = new Ajax.Request('php/loadSystem.php', {
-				method: 'post'
-			});
+	//var MyAjax = new Ajax.Request('php/loadSystem.php', {
+	//			method: 'post'
+	//		});
+	$.post('php/loadSystem.php')
 }
 //Function for creating 2 select items with all available start and destination points
 FRAIS.loadDestinations= function(){
-	var navBarSelectItemA=$("navBarSelectItemA");
-	//if (navBarSelectItemB != null) {
+
+	var navBarSelectItemA=$("#navBarSelectItemA").get(0);
+	console.log(navBarSelectItemA.childNodes);
+
+//	if (navBarSelectItemB != null) {
 		for (var i = 1; i < navBarSelectItemA.childNodes.length; i++) {
 			navBarSelectItemA.removeChild(navBarSelectItemA.childNodes[i]);
 		}
 		FRAIS.resetMain();
 	//}
-	var navBarSelectA=$("navBarSelectA");
+	var navBarSelectA=$("#navBarSelectA");
+
 	if(navBarSelectA!=null){
-		var project= $("navBarSelectA").value;
+		var project= navBarSelectA.val();
+
 		if(project!=0){
-			var MyAjax = new Ajax.Request('php/loadDestinations.php', {
+			/*var MyAjax = new Ajax.Request('php/loadDestinations.php', {
 				method: 'post',
 				parameters: {
 					projectId: project
 				}
-			});
+			});*/
+			$.post('php/loadDestinations.php', { projectId: project });
 		}
 	}
 }
 //Function for executing a search
 FRAIS.search =function(){
 	FRAIS.resetMain();
-	var start=$("navBarSelectBStart");
-	var dest=$("navBarSelectBDest");
+	var start=$("#navBarSelectBStart");
+	var dest=$("#navBarSelectBDest");
 	if(start != null && dest != null){
-		start=$("navBarSelectBStart").value;
-		dest=$("navBarSelectBDest").value;
+		start = start.val();
+		dest = dest.val();
 		if (start != 0 && dest != 0) {
 			if (start != dest) {
-				var MyAjax = new Ajax.Request('php/search.php', {
+				/*var MyAjax = new Ajax.Request('php/search.php', {
 					method: 'post',
 					parameters: {
 						startId: start,
 						destId: dest
 					}
 				});
+				*/
+				$.post('php/search.php', {
+					startId: start,
+					destId: dest
+				})
+				
 			}
 			else {
 				alert("Der ausgewaehlte Startpunkt stimmt mit dem Zielpunkt ueberein!");
