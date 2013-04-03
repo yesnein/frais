@@ -1,0 +1,17 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++
++ FRAIS - Facility Routing And Information System
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+FRAIS is a web-based routing system for buildings
+and facilities to enable shortest path finding.
+
+It is build using Javascript (incl. jQuery), HTML,
+CSS, SVG, MySQL and PHP for server-side AJAX 
+requests.
+
+FRAIS is provided as free softwar under the MIT 
+license, see LICENSE file.
+
+Have fun
+
+Max Noja (yesnein)
