@@ -1,6 +1,7 @@
 <?php header('content-type: text/javascript'); ?>
 /////////////
 // FRAIS
+// @author yesnein / yesnein.com
 /////////////
 
 // Ajax PHP script for loading  routing information systems
@@ -27,7 +28,6 @@ require_once ("config.inc.php");
 
 	var navBarSelectItemA=document.createElement("li");
 		navBarSelectItemA.id="navBarSelectItemA";
-
 
 	var navBarSelectA=document.createElement("select");
 		navBarSelectA.name="navBarSelectA";
@@ -62,4 +62,3 @@ require_once ("config.inc.php");
 	
 	
 	}());
-	

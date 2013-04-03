@@ -1,29 +1,9 @@
 /**
- * @author Max Noja
- * @date 04.03.2010
+ * Facility Routing and Information System - FRAIS 
+ * 
+ * @author yesnein / yesnein.com
+ * 
  */
-/*
-window.onload = function(){
-	wrapper = $("wrapper");
-		
-	var now = new Date()
-	if(now.getFullYear() <= 2010) {
-		$('#copyright_year').text("" + 2010);
-	}
-	else{
-		$('#copyright_year').text("" + 2010 + " \u2013 " + now.getFullYear());
-	}
-	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
-
-}
-window.onresize = function(){
-	wrapper = $("wrapper");
-	//wrapper.style.left = Math.round((window.innerWidth - 800)/2.)+"px";
-}
-*/
-/////////////
-// Facility Routing and Information System - FRAIS 
-/////////////
 
 // FRAIS Object containing all classes, methods and globals 
 var FRAIS={};
@@ -145,9 +125,9 @@ FRAIS.Layer= function(id,level,floor,desc,scale,width,height,refX,refY){
 	this.layer_loader.addEventListener("click",function(){that.loadLayer(that)},false);
 	
 	this.layer_loader_item.appendChild(this.layer_loader);
-
-	if($("navBarListE")!=null)
-		$("navBarListE").appendChild(this.layer_loader_item);
+	
+	if($("#navBarListE").length != 0)
+		$("#navBarListE").get(0).appendChild(this.layer_loader_item);
 	
 	//List-item with button for displaying the waypoints of the layer
 	this.point_loader_item = document.createElement("li");
@@ -163,8 +143,8 @@ FRAIS.Layer= function(id,level,floor,desc,scale,width,height,refX,refY){
 	
 	this.point_loader_item.appendChild(this.point_loader);
 	
-	if($("navBarListE")!=null)
-		$("navBarListE").appendChild(this.point_loader_item);
+	if($("#navBarListE").length != 0)
+		$("#navBarListE").get(0).appendChild(this.point_loader_item);
 	
 	//List-item with button for displaying the floorplan image of the layer
 	this.fp_loader_item = document.createElement("li");
@@ -180,10 +160,10 @@ FRAIS.Layer= function(id,level,floor,desc,scale,width,height,refX,refY){
 	
 	this.fp_loader_item.appendChild(this.fp_loader);
 	
-	if($("navBarListE")!=null)
-		$("navBarListE").appendChild(this.fp_loader_item);
+	if($("#navBarListE").length != 0)
+		$("#navBarListE").get(0).appendChild(this.fp_loader_item);
 	
-	$("main").appendChild(this.elem);
+	$("#main").get(0).appendChild(this.elem);
 	//Variable for the DOM-element of the SVG document of the layer
 	this.SVGDoc=null;
 	//Variable for the floorplan image of the layer
@@ -693,12 +673,12 @@ FRAIS.Layer.prototype.loadLayer= function(that){
 
 		var SVGtimer=setInterval(function(){
 			
-			if (typeof($("SVGObject" + that.id).getSVGDocument) == "function") {
+			if (typeof($("#SVGObject" + that.id).get(0).getSVGDocument) == "function") {
 				
-				if ($("SVGObject" + that.id) != null && $("SVGObject" + that.id).getSVGDocument()!=null) {
+				if ($("#SVGObject" + that.id).length && $("#SVGObject" + that.id).get(0).getSVGDocument()!=null) {
 					
 					//while (that.SVGDoc == null) {
-					that.SVGDoc = $("SVGObject" + that.id).getSVGDocument();
+					that.SVGDoc = $("#SVGObject" + that.id).get(0).getSVGDocument();
 					//}
 					if (that.SVGDoc != null) {	
 						clearInterval(SVGtimer);		
@@ -731,9 +711,9 @@ FRAIS.Layer.prototype.loadLayer= function(that){
 					}
 				}
 			}
-			else if (typeof($("SVGObject" + that.id).contentDocument) == "function") {
+			else if (typeof($("#SVGObject" + that.id).get(0).contentDocument) == "function") {
 				
-				if ($("SVGObject" + that.id) != null && $("SVGObject" + that.id).contentDocument!=null) {
+				if ($("#SVGObject" + that.id).length && $("#SVGObject" + that.id).get(0).contentDocument!=null) {
 					
 					//while (that.SVGDoc == null) {
 					that.SVGDoc = that.SVGObject.contentDocument;
@@ -854,18 +834,17 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 	
 	that.elem.style.display="";
 	
-	
 	if (that.SVGDoc == null) {
 		
-
+		
 		var SVGtimer=setInterval(function(){
 			
-			if (typeof($("SVGObject" + that.id).getSVGDocument) == "function") {
-				
-				if ($("SVGObject" + that.id) != null && $("SVGObject" + that.id).getSVGDocument()!=null) {
+			if (typeof($("#SVGObject" + that.id).get(0).getSVGDocument) == "function") {
+						
+				if ($("#SVGObject" + that.id).length && $("#SVGObject" + that.id).get(0).getSVGDocument()!=null) {
 					
 					//while (that.SVGDoc == null) {
-						that.SVGDoc = $("SVGObject" + that.id).getSVGDocument();
+						that.SVGDoc = $("#SVGObject" + that.id).get(0).getSVGDocument();
 					//}
 					if (that.SVGDoc != null) {	
 						clearInterval(SVGtimer);			
@@ -875,9 +854,9 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 					}
 				}
 			}
-			else if (typeof($("SVGObject" + that.id).contentDocument) == "function") {
-				
-				if ($("SVGObject" + that.id) != null && $("SVGObject" + that.id).contentDocument!=null) {
+			else if (typeof($("#SVGObject" + that.id).get(0).contentDocument) == "function") {
+
+				if ($("#SVGObject" + that.id).length && $("#SVGObject" + that.id).get(0).contentDocument!=null) {
 					
 					//while (that.SVGDoc == null) {
 						that.SVGDoc = that.SVGObject.contentDocument;
@@ -885,7 +864,7 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 					
 					if (that.SVGDoc != null) {	
 						clearInterval(SVGtimer);			
-						if (FRAIS.layerMode == "overview") {
+						if (FRAIS.layerMode == "overview") {							
 							that.loadSearchResults(that);
 						}
 					}
@@ -912,7 +891,7 @@ FRAIS.Layer.prototype.loadSearchLayer= function(that){
 			
 			if (FRAIS.layerMode == "overview") {
 				//that.SVGDoc.documentElement.addEventListener("click", FRAIS.deactivatePoint, false);
-				//that.SVGDoc.documentElement.addEventListener("click", FRAIS.deactivatePoint, false);
+				//that.SVGDoc.documentElement.addEventListener("click", FRAIS.deactivatePoint, false);				
 				that.loadSearchResults(that);
 				//that.loadPoints(that);
 			}
@@ -951,7 +930,8 @@ FRAIS.setActiveLayer= function(layer_id){
 		}
 		FRAIS.activeLayer.id = layer_id;
 		FRAIS.activeLayer.isSet = true;
-		$("navBarSelectE").value = FRAIS.layers[FRAIS.activeLayer.id].level;
+		//TODO maybe causes an error
+		$("#navBarSelectE").val(FRAIS.layers[FRAIS.activeLayer.id].level);
 		FRAIS.layers[FRAIS.activeLayer.id].layer_loader_item.style.display = "";
 		if(FRAIS.layerMode!="overview")FRAIS.layers[FRAIS.activeLayer.id].fp_loader_item.style.display = "";
 		if(FRAIS.layerMode=="waypoints")
@@ -964,9 +944,10 @@ FRAIS.setActiveLayer= function(layer_id){
 		FRAIS.layers[FRAIS.activeLayer.id].label.style.borderLeft="2px solid rgb(27,165,229)";
 		FRAIS.layers[FRAIS.activeLayer.id].elem.style.zIndex = FRAIS.displayed_layers * 10;
 		
-		if ($("pointInfo") != null && FRAIS.layers[FRAIS.activeLayer.id].containsPoint(FRAIS.activePoint.id)) {
-			$("pointInfo").style.borderTop = "2px solid rgb(27,165,229)";
-			$("pointInfo").style.zIndex = FRAIS.displayed_layers * 10;
+		if ($("#pointInfo").length && FRAIS.layers[FRAIS.activeLayer.id].containsPoint(FRAIS.activePoint.id)) {
+			//TODO maybe causes an error
+			$("#pointInfo").css({borderTop: "2px solid rgb(27,165,229)",
+							     zIndex: FRAIS.displayed_layers * 10});
 		}
 		
 		if (shift == "after") {
@@ -975,9 +956,14 @@ FRAIS.setActiveLayer= function(layer_id){
 			for (var i = FRAIS.layers[FRAIS.activeLayer.id].layer_position + 1; i <= FRAIS.displayed_layers; i++) {
 			
 				if (FRAIS.getLayerByPosition(i) != null) {
-					FRAIS.getLayerByPosition(i).elem.style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - ((FRAIS.layers[FRAIS.activeLayer.id].layer_position + j) * 10);
-					if($("pointInfo") != null && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id))
-						$("pointInfo").style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - ((FRAIS.layers[FRAIS.activeLayer.id].layer_position + j) * 10);
+					
+					FRAIS.getLayerByPosition(i).elem.style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - 
+					((FRAIS.layers[FRAIS.activeLayer.id].layer_position + j) * 10);
+					
+					if($("#pointInfo").length && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id)){
+						$("#pointInfo").css({zIndex: FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - 
+							((FRAIS.layers[FRAIS.activeLayer.id].layer_position + j) * 10)});
+					}
 					j++;
 				}
 			}
@@ -987,8 +973,9 @@ FRAIS.setActiveLayer= function(layer_id){
 			
 				if (FRAIS.getLayerByPosition(i) != null) {
 					FRAIS.getLayerByPosition(i).elem.style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - (j * 10);
-					if($("pointInfo") != null && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id))
-						$("pointInfo").style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - (j * 10);
+					if($("#pointInfo").length && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id)){
+						$("#pointInfo").css({zIndex: FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - (j * 10)});
+					}
 					j++;
 				}
 			}
@@ -1000,8 +987,9 @@ FRAIS.setActiveLayer= function(layer_id){
 				
 					if (FRAIS.getLayerByPosition(i) != null) {
 						FRAIS.getLayerByPosition(i).elem.style.zIndex = (FRAIS.displayed_layers - j) * 10;
-						if($("pointInfo") != null && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id))
-							$("pointInfo").style.zIndex = (FRAIS.displayed_layers - j) * 10;
+						if($("#pointInfo").length && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id)){
+							$("#pointInfo").css({zIndex: (FRAIS.displayed_layers - j) * 10});
+						}
 						j++
 					}
 				}
@@ -1009,8 +997,9 @@ FRAIS.setActiveLayer= function(layer_id){
 				
 					if (FRAIS.getLayerByPosition(i) != null) {
 						FRAIS.getLayerByPosition(i).elem.style.zIndex = i * 10;
-						if($("pointInfo") != null && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id))
-							$("pointInfo").style.zIndex = i * 10;
+						if($("#pointInfo").length && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id)){
+							$("#pointInfo").css({zIndex: i * 10});
+						}
 					}
 				}
 			}
@@ -1019,16 +1008,18 @@ FRAIS.setActiveLayer= function(layer_id){
 				
 					if (FRAIS.getLayerByPosition(i) != null) {
 						FRAIS.getLayerByPosition(i).elem.style.zIndex.style.zIndex = (FRAIS.layers_count - i + 1) * 10;
-						if($("pointInfo") != null && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id))
-							$("pointInfo").style.zIndex = (FRAIS.layers_count - i + 1) * 10;
+						if($("#pointInfo").length && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id)){
+							$("#pointInfo").css({zIndex: (FRAIS.layers_count - i + 1) * 10});
+						}
 					}
 				}
 				for (var i = 1; i < FRAIS.layers[FRAIS.activeLayer.id].layer_position - 2; i++) {
 				
 					if (FRAIS.getLayerByPosition(i) != null) {
 						FRAIS.getLayerByPosition(i).elem.style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - (i * 10);
-						if($("pointInfo") != null && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id))
-							$("pointInfo").style.zIndex = FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - (i * 10);
+						if($("#pointInfo").length && FRAIS.getLayerByPosition(i).containsPoint(FRAIS.activePoint.id)){
+							$("#pointInfo").css({zIndex: FRAIS.getLayerByPosition(FRAIS.layers[FRAIS.activeLayer.id].layer_position).elem.style.zIndex - (i * 10)});
+						}
 					}
 				}
 			}
@@ -1037,13 +1028,12 @@ FRAIS.setActiveLayer= function(layer_id){
 //Function to make a layer inactive
 FRAIS.unsetActiveLayer=function(){
 	if(FRAIS.activeLayer.isSet){
-		$("display_layer"+FRAIS.activeLayer.id).style.borderTop="0px";
-		$("display_layer"+FRAIS.activeLayer.id).style.zIndex=(FRAIS.displayed_layers-1)*10;
-		$("label"+FRAIS.activeLayer.id).style.borderTop="2px solid "+$("display_layer"+FRAIS.activeLayer.id).style.backgroundColor;
-		$("label"+FRAIS.activeLayer.id).style.borderLeft="2px solid "+$("display_layer"+FRAIS.activeLayer.id).style.backgroundColor;
-		if ($("pointInfo") != null && FRAIS.layers[FRAIS.activeLayer.id].containsPoint(FRAIS.activePoint.id)) {
-			$("pointInfo").style.borderTop = "0px";
-			$("pointInfo").style.zIndex = (FRAIS.displayed_layers-1) * 10;
+		$("#display_layer"+FRAIS.activeLayer.id).css({borderTop: "0px"});
+		$("#display_layer"+FRAIS.activeLayer.id).css({zIndex: (FRAIS.displayed_layers-1)*10});
+		$("#label"+FRAIS.activeLayer.id).css({borderTop: "2px solid " + $("#display_layer"+FRAIS.activeLayer.id).get(0).style.backgroundColor});
+		$("#label"+FRAIS.activeLayer.id).css({borderLeft: "2px solid " + $("#display_layer"+FRAIS.activeLayer.id).get(0).style.backgroundColor});
+		if ($("#pointInfo").length && FRAIS.layers[FRAIS.activeLayer.id].containsPoint(FRAIS.activePoint.id)) {
+			$("#pointInfo").css({borderTop: "0px", zIndex: (FRAIS.displayed_layers-1) * 10});
 		}
 		FRAIS.layers[FRAIS.activeLayer.id].layer_loader_item.style.display="none";
 		FRAIS.layers[FRAIS.activeLayer.id].point_loader_item.style.display="none";
@@ -1059,7 +1049,7 @@ FRAIS.unsetActiveLayer=function(){
 //the navigation bar uses a hierarchical system list-items in 5 steps named from  A to E
 FRAIS.loadEditorNavBar=function(){
 	//at first get the DIV element from the html-page
-	var navBar=$("navBar");
+	var navBar=$("#navBar").get(0);
 	//probably obsolete reset button
 	var navBarResetButton=document.createElement("input");
 		navBarResetButton.id="navBarResetButton";
@@ -1107,19 +1097,17 @@ FRAIS.loadEditorNavBar=function(){
 }
 //Function to load the first task for creating a faclity routing system --> create or choose a project
 FRAIS.loadTask=function(){
-	var navBarSelectItemA=$("navBarSelectItemA");
+	var navBarSelectItemA=$("#navBarSelectItemA").get(0);
 	for(var i=1;i< navBarSelectItemA.childNodes.length;i++){
 		navBarSelectItemA.removeChild(navBarSelectItemA.childNodes[i]);
 	}
 	FRAIS.resetMain();
 		//navBarSelectA.addEventListener("change",resetMain,false);
-	if (parseInt($("navBarSelectA").value) == 1) {
-		var MyAjax = new Ajax.Request('php/loadProject.php', {
-			method: 'post'
-		});
+	if (parseInt($("#navBarSelectA").val()) == 1) {
+			$.post('php/loadProject.php');
 	}
-	if(parseInt($("navBarSelectA").value) == 2){
-		var main=$("main");
+	if(parseInt($("#navBarSelectA").val()) == 2){
+		var main=$("#main").get(0);
 		var addProjectList=document.createElement("ul");
 			addProjectList.id="addProjectList";
 			addProjectList.className="mainList";
@@ -1145,19 +1133,17 @@ FRAIS.loadTask=function(){
 }
 //Function for creating a new project
 FRAIS.addProject= function(){
-	if ($("addProjectNameInput") != null) {
-		var projectName = $("addProjectNameInput").value;
+	if ($("#addProjectNameInput").length) {
+		var projectName = $("#addProjectNameInput").val();
 		if (projectName == "") {
 			alert("Es wurde kein Name fuer das Projekt angegeben!");
 		}
 		else {
 			if (projectName.length <= 45) {
-				var MyAjax = new Ajax.Request('php/addProject.php', {
-					method: 'post',
-					parameters: {
+				$.post('php/addProject.php', {
 						name: projectName
 					}
-				});
+				);
 			}
 			else {
 				alert("Der Name fuer das Projekt ist zu lang!");
@@ -1168,14 +1154,14 @@ FRAIS.addProject= function(){
 //Function to choose to what to do with the chosen project
 FRAIS.loadProjectTask= function(){
 	//at first remove all subsequent list-items
-	var navBarSelectItemB=$("navBarSelectItemB");
+	var navBarSelectItemB=$("#navBarSelectItemB").get(0);
 	for(var i=1;i< navBarSelectItemB.childNodes.length;i++){
 		navBarSelectItemB.removeChild(navBarSelectItemB.childNodes[i]);
 	}
 	//clear the main DIV
 	FRAIS.resetMain();
 	//create the list-item with a select item to choose the task 
-	if (parseInt($("navBarSelectB").value) != 0) {
+	if (parseInt($("#navBarSelectB").val()) != 0) {
 		
 		var navBarListC=document.createElement("ul");
 			navBarListC.id="navBarListC";
@@ -1232,47 +1218,44 @@ FRAIS.loadProjectTask= function(){
 }
 //Function to choose the project task
 FRAIS.chooseProjectTask= function(){
-	var navBarSelectItemC=$("navBarSelectItemC");
+	var navBarSelectItemC=$("#navBarSelectItemC").get(0);
 	for(var i=1;i< navBarSelectItemC.childNodes.length;i++){
 		navBarSelectItemC.removeChild(navBarSelectItemC.childNodes[i]);
 	}
 	FRAIS.resetMain();
 	
-	var navBarSelectC=$("navBarSelectC");
+	var navBarSelectC=$("#navBarSelectC");
 	
-	if(navBarSelectC.value==1){
+	if(navBarSelectC.val()==1){
 		FRAIS.manageBuildings();
 	}
-	if(navBarSelectC.value==2){
+	if(navBarSelectC.val()==2){
 		FRAIS.getBuildingsForLevels();
 	}
-	if(navBarSelectC.value==3){
+	if(navBarSelectC.val()==3){
 		FRAIS.layerMode="floorplan";
 		FRAIS.getBuildingsForFloorplans();
 	}
-	if(navBarSelectC.value==4){
+	if(navBarSelectC.val()==4){
 		FRAIS.layerMode="waypoints";
 		FRAIS.getBuildingsForWaypoints();
 	}
-	if(navBarSelectC.value==5){
+	if(navBarSelectC.val()==5){
 		FRAIS.deleteProject();
 	}
 }
 
 //function for deleting the chosen project
 FRAIS.deleteProject= function(){
-	var project = parseInt($("navBarSelectB").value);
+	var project = parseInt($("#navBarSelectB").val());
 	if(project==0){
 		alert("Kein Projekt ausgewaehlt!");
 		return;
 	}
 
 	if (window.confirm("Dieses Projekt wirklich loeschen?")) {		
-		var MyAjax = new Ajax.Request('php/deleteProject.php', {
-			method: 'post',
-			parameters: {
-				projectId: project,
-			}
+		$.post('php/deleteProject.php', {
+			projectId: project
 		});
 	}
 	
@@ -1280,7 +1263,7 @@ FRAIS.deleteProject= function(){
 //Function for choosing a layer from the fifth select item to be loaded into the editor
 FRAIS.chooseLayer= function(){
 	
-	var level=parseInt($("navBarSelectE").value);
+	var level=parseInt($("#navBarSelectE").val());
 	var layer=FRAIS.getLayerByLevel(level);
 	if (layer != null) 
 		if (layer.elem.style.display != "none") {
@@ -1302,7 +1285,7 @@ FRAIS.chooseLayer= function(){
 
 // show the building management form
 FRAIS.manageBuildings=function(){
-	var main= $("main");
+	var main= $("#main").get(0);
 	var manageBuildingList=document.createElement("ul");
 		manageBuildingList.id="manageBuildingList";
 		manageBuildingList.className="mainList";
@@ -1332,16 +1315,13 @@ FRAIS.manageBuildings=function(){
 
 // Add a building to the database, the selected project is used for database reference
 FRAIS.addBuilding=function(){
-	var buildingDesc=$("addBuildingDescInput").value;
-	var project=parseInt($("navBarSelectB").value);
+	var buildingDesc=$("#addBuildingDescInput").val();
+	var project=parseInt($("#navBarSelectB").val());
 	if(buildingDesc!=""){
 		if(buildingDesc.length <= 50){
-			var MyAjax = new Ajax.Request('php/addBuilding.php', {
-					method: 'post',
-					parameters: {
-						desc: buildingDesc,
-						projectId: project
-					}
+			$.post('php/addBuilding.php', {
+				desc: buildingDesc,
+				projectId: project
 			});
 		}
 		else{
@@ -1355,27 +1335,21 @@ FRAIS.addBuilding=function(){
 
 //get all available buildings for the building management form
 FRAIS.getBuildingsForDelete=function(){
-	var project=parseInt($("navBarSelectB").value);
-	var MyAjax = new Ajax.Request('php/getBuildingsForDelete.php', {
-		method: 'post',
-		parameters: {
-			projectId: project
-		}
+	var project=parseInt($("#navBarSelectB").val());
+	$.post('php/getBuildingsForDelete.php', {
+		projectId: project
 	});
 }
 
 //function for deleting a building
 FRAIS.deleteBuilding=function(){
-	var project = parseInt($("navBarSelectB").value);
-	var building = parseInt($("delBuildingSelect").value);
+	var project = parseInt($("#navBarSelectB").val());
+	var building = parseInt($("#delBuildingSelect").val());
 	if (building != 0) {
 		if (window.confirm("Dieses Gebaeude wirklich loeschen?")) {		
-			var MyAjax = new Ajax.Request('php/deleteBuilding.php', {
-				method: 'post',
-				parameters: {
-					projectId: project,
-					buildingId: building
-				}
+			$.post('php/deleteBuilding.php', {
+				projectId: project,
+				buildingId: building
 			});
 		}
 	}
@@ -1389,24 +1363,21 @@ FRAIS.deleteBuilding=function(){
 /////////////////////////////////
 //Get the buildings the levels belong to and add them to the nav bar
 FRAIS.getBuildingsForLevels= function(){
-	var project=parseInt($("navBarSelectB").value);
-	var MyAjax = new Ajax.Request('php/getBuildingsForLevels.php', {
-		method: 'post',
-		parameters: {
-			projectId: project
-		}
+	var project=parseInt($("#navBarSelectB").val());
+	$.post('php/getBuildingsForLevels.php', {
+		projectId: project
 	});	
 }
 // show the level management form
 FRAIS.manageLevels= function(){
-	var navBarSelectItemD=$("navBarSelectItemD");
+	var navBarSelectItemD=$("#navBarSelectItemD").get(0);
 	for(var i=1;i< navBarSelectItemD.childNodes.length;i++){
 		navBarSelectItemD.removeChild(navBarSelectItemD.childNodes[i]);
 	}
 	FRAIS.resetMain();
 	
-	if (parseInt($("navBarSelectD").value) != 0) {
-		var main = $("main");
+	if (parseInt($("#navBarSelectD").val()) != 0) {
+		var main = $("#main").get(0);
 		
 		var manageLevelForm= document.createElement("form");
 			manageLevelForm.action="php/upload.php";
@@ -1529,39 +1500,34 @@ FRAIS.manageLevels= function(){
 }
 //get all available levels for the level management form
 FRAIS.getLevelsForDelete=function(){
-	var project=parseInt($("navBarSelectB").value);
-	var building=parseInt($("navBarSelectD").value);
-	var MyAjax = new Ajax.Request('php/getLevelsForDelete.php', {
-		method: 'post',
-		parameters: {
-			projectId: project,
-			buildingId: building
-		}
+	var project=parseInt($("#navBarSelectB").val());
+	var building=parseInt($("#navBarSelectD").val());
+	$.post('php/getLevelsForDelete.php', {
+		projectId: project,
+		buildingId: building
 	});
 }
 //Function for deleting a level
 FRAIS.deleteLevel=function(){
-	var project = parseInt($("navBarSelectB").value);
-	var building = parseInt($("navBarSelectD").value);
+	var project = parseInt($("#navBarSelectB").val());
+	//TODO possibly remove the following line
+	//var building = parseInt($("#navBarSelectD").val());
 	if(project==0){
 		alert("Kein Projekt ausgewaehlt!");
 		return;
 	}
-	var building=parseInt($("navBarSelectD").value);
+	var building=parseInt($("#navBarSelectD").val());
 	if(building==0){
 		alert("Kein Haus ausgewaehlt!");
 		return;
 	}
-	var level = parseInt($("delLevelSelect").value);
+	var level = parseInt($("#delLevelSelect").val());
 	if (level != 0) {
 		if (window.confirm("Diese Etage wirklich loeschen?")) {		
-			var MyAjax = new Ajax.Request('php/deleteLevel.php', {
-				method: 'post',
-				parameters: {
-					projectId: project,
-					buildingId: building,
-					levelId: level
-				}
+			$.post('php/deleteLevel.php', {
+				projectId: project,
+				buildingId: building,
+				levelId: level
 			});
 		}
 	}
@@ -1573,55 +1539,55 @@ FRAIS.deleteLevel=function(){
 FRAIS.addLevel=function(e){
 	if(!e) e=window.event;
 	
-	var project=parseInt($("navBarSelectB").value);
+	var project=parseInt($("#navBarSelectB").val());
 	if(project==0){
 		alert("Kein Projekt ausgewaehlt!");
 		e.preventDefault();
 		return;
 	}
-	var building=parseInt($("navBarSelectD").value);
+	var building=parseInt($("#navBarSelectD").val());
 	if(building==0){
 		alert("Kein Haus ausgewaehlt!");
 		e.preventDefault();
 		return;
 	}
-	var desc=$("addLevelDescInput").value;
+	var desc=$("#addLevelDescInput").val();
 	if(desc==""){
 		alert("Es wurde keine Ebenenbeschreibung angegeben!");
 		e.preventDefault();
 		return;
 	}
-	var image=$("addLevelFloorplanImageInput").value;
+	var image=$("#addLevelFloorplanImageInput").val();
 	if(!image.match(/(.jpg|.jpeg|.png|.gif)$/i)){
 		alert("Falsches Bildformat oder keine Grundrissgrafik angegeben!");
 		e.preventDefault();
 		return;
 	}
-	var length=$("addLevelFloorplanLengthInput").value;
+	var length=$("#addLevelFloorplanLengthInput").val();
 	if(!length.match(/^[1-9][0-9]*$/)){
 		alert("Ungueltige Grundrissbreite angegeben!");
 		e.preventDefault();
 		return;
 	}
-	var height=$("addLevelFloorplanHeightInput").value;
+	var height=$("#addLevelFloorplanHeightInput").val();
 	if(!height.match(/^[1-9][0-9]*$/)){
 		alert("Ungueltige Grundrisshoehe angegeben!");
 		e.preventDefault();
 		return;
 	}
-	var refX=$("addLevelFloorplanRefXInput").value;
+	var refX=$("#addLevelFloorplanRefXInput").val();
 	if(!refX.match(/^([0-9]|[1-9][0-9]+)$/)){
 		alert("Ungueltige X Referenzkoordinate angegeben!");
 		e.preventDefault();
 		return;
 	}
-	var refY=$("addLevelFloorplanRefYInput").value;
+	var refY=$("#addLevelFloorplanRefYInput").val();
 	if(!refY.match(/^([0-9]|[1-9][0-9]+)$/)){
 		alert("Ungueltige Y Referenzkoordinate angegeben!");
 		e.preventDefault();
 		return;
 	}
-	var scale=$("addLevelFloorplanScaleInput").value;
+	var scale=$("#addLevelFloorplanScaleInput").val();
 	if(!scale.match(/^[1-9]+$/)){
 		alert("Ungueltige Massstabszahl angegeben!");
 		e.preventDefault();
@@ -1649,30 +1615,24 @@ FRAIS.addLevel=function(e){
 /////////////////////////////////////
 //Get the buildings the floorplans belong to based on the chosen project
 FRAIS.getBuildingsForFloorplans= function(){
-	var project=parseInt($("navBarSelectB").value);
-	var MyAjax = new Ajax.Request('php/getBuildingsForFloorplans.php', {
-		method: 'post',
-		parameters: {
-			projectId: project
-		}
+	var project=parseInt($("#navBarSelectB").val());
+	$.post('php/getBuildingsForFloorplans.php', {
+		projectId: project
 	});
 }
 //Get the levels the floorplans belong to based on the chosen project and building
 FRAIS.loadLevelsForFloorplans= function(){
-	var navBarSelectItemD=$("navBarSelectItemD");
+	var navBarSelectItemD=$("#navBarSelectItemD").get(0);
 	for(var i=1;i< navBarSelectItemD.childNodes.length;i++){
 		navBarSelectItemD.removeChild(navBarSelectItemD.childNodes[i]);
 	}
 	FRAIS.resetMain();
-	if (parseInt($("navBarSelectD").value) != 0) {
-		var project = parseInt($("navBarSelectB").value);
-		var building = $("navBarSelectD").value;
-		var MyAjax = new Ajax.Request('php/loadLevelsForFloorplans.php', {
-			method: 'post',
-			parameters: {
-				projectId: project,
-				buildingId: building
-			}
+	if (parseInt($("#navBarSelectD").val()) != 0) {
+		var project = parseInt($("#navBarSelectB").val());
+		var building = $("#navBarSelectD").val();
+		$.post('php/loadLevelsForFloorplans.php', {
+			projectId: project,
+			buildingId: building
 		});
 	}
 }
@@ -1682,46 +1642,36 @@ FRAIS.loadLevelsForFloorplans= function(){
 /////////////////////////////////////
 //Get the buildings the waypoints belong to based on the chosen project
 FRAIS.getBuildingsForWaypoints= function(){
-	var project=parseInt($("navBarSelectB").value);
-	var MyAjax = new Ajax.Request('php/getBuildingsForWaypoints.php', {
-		method: 'post',
-		parameters: {
-			projectId: project
-		}
+	var project=parseInt($("#navBarSelectB").val());
+	$.post('php/getBuildingsForWaypoints.php',{
+		projectId: project
 	});
 }
 //Get the levels the waypoints belong to based on the chosen project and building
 FRAIS.loadLevelsForWaypoints= function(){
-	var navBarSelectItemD=$("navBarSelectItemD");
+	var navBarSelectItemD=$("#navBarSelectItemD").get(0);
 	for(var i=1;i< navBarSelectItemD.childNodes.length;i++){
 		navBarSelectItemD.removeChild(navBarSelectItemD.childNodes[i]);
 	}
 	FRAIS.resetMain();
-	if (parseInt($("navBarSelectD").value) != 0 && parseInt($("navBarSelectD").value) != 999) {
+	if (parseInt($("#navBarSelectD").val()) != 0 && parseInt($("#navBarSelectD").val()) != 999) {
 		FRAIS.layerMode="waypoints";
-		var project = parseInt($("navBarSelectB").value);
-		var building = $("navBarSelectD").value;
-		var MyAjax = new Ajax.Request('php/loadLevelsForWaypoints.php', {
-			method: 'post',
-			parameters: {
-				projectId: project,
-				buildingId: building
-			}
+		var project = parseInt($("#navBarSelectB").val());
+		var building = $("#navBarSelectD").val();
+		$.post('php/loadLevelsForWaypoints.php', {
+			projectId: project,
+			buildingId: building
 		});
 	}
-	if (parseInt($("navBarSelectD").value) == 999) {
+	if (parseInt($("#navBarSelectD").val()) == 999) {
 		FRAIS.layerMode="overview";
-		var project = parseInt($("navBarSelectB").value);
+		var project = parseInt($("#navBarSelectB").val());
 		//var building = $("navBarSelectD").value;
-		var MyAjax = new Ajax.Request('php/loadLevelsWithAllBuildingsForWaypoints.php', {
-			method: 'post',
-			parameters: {
-				projectId: project
-				//buildingId: building
-			}
+		$.post('php/loadLevelsWithAllBuildingsForWaypoints.php', {
+			projectId: project
+			//buildingId: building
 		});
 	}
-	
 }
 
 /*FRAIS.loadLayers=function(){
@@ -1738,9 +1688,9 @@ FRAIS.loadLevelsForWaypoints= function(){
 //Function for resetting the nav bar to its initial state
 FRAIS.resetNavBar= function(){
 	
-	var navBar=$("navBar");
+	var navBar=$("#navBar").get(0);
 
-	var oldNavBarList=$("navBarListA");
+	var oldNavBarList=$("#navBarListA").get(0);
 		
 	var navBarResetButton=document.createElement("input");
 		navBarResetButton.id="navBarResetButton";
@@ -1792,8 +1742,8 @@ FRAIS.resetNavBar= function(){
 }
 //Function to clear the main DIV of the FRAIS
 FRAIS.resetMain= function(){
-	if($("main")!=null){
-		var main=$("main");
+	if($("#main").length){
+		var main=$("#main").get(0);
 
 		while(main.childNodes.length > 0){
 			main.removeChild(main.firstChild);
@@ -2054,17 +2004,14 @@ FRAIS.saveFPElement= function(FPElement,geomType){
 			else {
 				action = 2; //insert in the database
 			}
-			var wktAjax = new Ajax.Request('php/saveFPElement.php', {
-				method: 'post',
-				parameters: {
-					id: FPElement.id,
-					mode: action,
-					type: geomType,
-					level: FPElement.level,
-					building: FPElement.building,
-					project: FPElement.project,
-					wkt: geomWKT
-				}
+			$.post('php/saveFPElement.php', {
+				id: FPElement.id,
+				mode: action,
+				type: geomType,
+				level: FPElement.level,
+				building: FPElement.building,
+				project: FPElement.project,
+				wkt: geomWKT
 			});
 			
 		}
@@ -2079,9 +2026,10 @@ FRAIS.saveFPElement= function(FPElement,geomType){
 //Function for finshing a floorplan element as a polygon
 FRAIS.finishPolygonFPElement=function(e){
 	
-	if (!e) 
+	if (!e){ 
 		e = window.event;
-		e.stopPropagation();
+	}
+	e.stopPropagation();
 	if (e.shiftKey) {
 		
 		if(FRAIS.tempFPElement!=null){
@@ -2111,9 +2059,10 @@ FRAIS.finishPolygonFPElement=function(e){
 //Function for finshing a floorplan element as a linestring
 FRAIS.finishLinestringFPElement=function(e){
 	
-	if (!e) 
+	if (!e){ 
 		e = window.event;
-		e.stopPropagation();
+	}
+	e.stopPropagation();
 	if (e.shiftKey) {
 
 		//if (confirm("LINESTRING Element abschliessen?")) {
@@ -2137,9 +2086,10 @@ FRAIS.finishLinestringFPElement=function(e){
 }
 // Function to re-open a finished floorplan element for editing
 FRAIS.reopenFPElement=function(e){
-	if (!e) 
+	if (!e){ 
 		e = window.event;
-		e.stopPropagation();
+	}
+	e.stopPropagation();
 	if (e.shiftKey) {
 		if (!FRAIS.activeFPElement) {
 			var FPElement = parseInt(parseInt(e.currentTarget.getAttributeNS(null, "id").match(/[0-9]+/)) / 100);
@@ -2197,9 +2147,10 @@ FRAIS.reopenFPElement=function(e){
 }
 //Function for updating a finished floorplan element whose floorpoints have been moved
 FRAIS.updateFinishedFPElement=function(e){
-	if (!e) 
+	if (!e){ 
 		e = window.event;
-		e.stopPropagation();
+	}
+	e.stopPropagation();
 	if (e.altKey) {
 		if (!FRAIS.activeFPElement) {
 			var FPElement = FRAIS.FPElements[parseInt(parseInt(e.currentTarget.getAttributeNS(null, "id").match(/[0-9]+/)) / 100)];
@@ -2372,7 +2323,9 @@ FRAIS.FloorPoint.prototype.addToScreen = function(){
 }
 //Function for showing information about a floorpoint in an box
 FRAIS.showFloorPointInfo= function(e){
-	if(!e)e=window.event;
+	if(!e){
+		e=window.event;
+	}
 	
 	var popup= document.createElement("div");
 		popup.id="FPpopup";
@@ -2399,19 +2352,21 @@ FRAIS.showFloorPointInfo= function(e){
 		popup.appendChild(document.createElement("br"));
 		popup.appendChild(document.createTextNode("Y: " +(posY)));
 		//document.body.appendChild(popup);
-		if($("main") != null){
-			$("main").appendChild(popup);
+		if($("#main").length){
+			$("#main").get(0).appendChild(popup);
 		}
 }
 //Function for removing the infobox of a floorpoint  
 FRAIS.hideFloorPointInfo= function(){
-	if($("FPpopup") != null){
-		$("main").removeChild($("FPpopup"));
+	if($("#FPpopup").length){
+		$("#main").get(0).removeChild($("#FPpopup").get(0));
 	}
 }
 //Function for removing a floorpoint from a floorplan element
 FRAIS.removeFloorPoint= function(e){
-	if(!e)e=window.event;
+	if(!e){
+		e=window.event;
+	}
 	e.stopPropagation();
 	
 	if (e.altKey) {
@@ -2447,7 +2402,9 @@ FRAIS.removeFloorPoint= function(e){
 }
 //Function for selecting a floorpoint for drag and drop moving 
 FRAIS.selectFloorPoint=function(e){
-	if(!e)e=window.event;
+	if(!e){
+		e=window.event;
+	}
 	
 	if(FRAIS.selectedFloorPoint) FRAIS.deselectFloorPoint();
 	
@@ -2468,7 +2425,9 @@ FRAIS.deselectFloorPoint=function(){
 FRAIS.dragFloorPoint=function(e){
 	
 	if (FRAIS.selectedFloorPoint) {
-	if(!e)e=window.event;	
+	if(!e){
+		e=window.event;
+	}	
 	var elementToDrag = e.currentTarget;
 		
 		function moveHandler(f) {
@@ -2577,13 +2536,14 @@ FRAIS.setXCoord= function(){
 	var x=this.value;
 	if (x.match(/^[0-9]+$/)) {
 		FRAIS.showResetPointPosition();
-		var point = parseInt($('inputPointID').value);
+		var point = parseInt($('#inputPointID').val());
 		var pos = FRAIS.displayedXCoordinate(this.value);
 		FRAIS.wayPoints[point].SVGElem.setAttributeNS(null, "cx", pos);
 	}else{
 		alert("Unzulaessiger Wert fuer X!");
-		var point = parseInt($('inputPointID').value);
-		$('inputX').value=FRAIS.wayPoints[point].x;
+		var point = parseInt($('#inputPointID').val());
+		//TODO maybe causes an error
+		$('#inputX').val(FRAIS.wayPoints[point].x);
 	}
 }
 //Function to set the y-coordinate of a waypoint from the attribute-box of the waypoint  
@@ -2593,20 +2553,24 @@ FRAIS.setYCoord=function(){
 	var y=this.value;
 	if (y.match(/^[0-9]+$/)) {
 		FRAIS.showResetPointPosition();
-		var point = parseInt($('inputPointID').value);
+		var point = parseInt($('#inputPointID').val());
 		var pos = FRAIS.displayedYCoordinate(this.value);
 		FRAIS.wayPoints[point].SVGElem.setAttributeNS(null, "cy", pos);
 	}else{
 		alert("Unzulaessiger Wert fuer Y!");
-		var point = parseInt($('inputPointID').value);
-		$('inputY').value=FRAIS.wayPoints[point].y;
+		var point = parseInt($('#inputPointID').val());
+		//TODO maybe causes an error
+		$('#inputY').val(FRAIS.wayPoints[point].y);
 	}
 }
 
 //Drag-and-drop functionality for waypoints
 FRAIS.drag=function(e){
 	
-	if(!e)e=window.event;
+	if(!e){
+		e=window.event;
+	}
+	
 	if (FRAIS.activePoint.isSet && FRAIS.activePoint.id == e.currentTarget.id) {
 
 		var elementToDrag = e.currentTarget;
@@ -2616,7 +2580,9 @@ FRAIS.drag=function(e){
 		
 		function moveHandler(f) {
 		
-		   if (!f) f = window.event; 
+		   if (!f){
+		   	f = window.event;
+		   } 
 		   //if($("resetItem")==null)
 		   //		$("changeList").appendChild(resetItem);
 		   FRAIS.showResetPointPosition();
@@ -2634,9 +2600,9 @@ FRAIS.drag=function(e){
 		   
 			 elementToDrag.setAttributeNS(null,"cx",newPosX);
 			 elementToDrag.setAttributeNS(null,"cy",newPosY);
-			 
-			$("inputX").value= FRAIS.realXCoordinate(newPosX); 
-			$("inputY").value= FRAIS.realYCoordinate(newPosY);
+			// TODO maybe causes an error
+			$("#inputX").val(FRAIS.realXCoordinate(newPosX)); 
+			$("#inputY").val(FRAIS.realYCoordinate(newPosY));
 			 
 			 FRAIS.showUpdatePoint();
 
@@ -2647,7 +2613,9 @@ FRAIS.drag=function(e){
 		 
 		function upHandler(g) {
 	
-			if (!g) g = window.event; 
+			if (!g){
+				g = window.event;
+			} 
 			
 			FRAIS.layers[FRAIS.activeLayer.id].SVGDoc.documentElement.removeEventListener("mousemove",moveHandler,false);
 		 	FRAIS.layers[FRAIS.activeLayer.id].SVGDoc.documentElement.removeEventListener("mouseup",upHandler,false);
@@ -2695,26 +2663,27 @@ FRAIS.showInfo=function(e){
 		popup.appendChild(document.createTextNode("Y: " +(posY)));
 		
 		//document.body.appendChild(popup);
-		if($("main") != null){
-			$("main").appendChild(popup);
+		if($("#main").length){
+			$("#main").get(0).appendChild(popup);
 		}
 }
 //Function for removing the info box of a waypoint
 FRAIS.hideInfo= function(){
-	if($("popup")!=null)
-		$("main").removeChild($("popup"));
+	if($("#popup").length){
+		$("#main").get(0).removeChild($("#popup").get(0));
+	}
 }
 // Function for deselecting a waypoint
 FRAIS.deactivatePoint= function(e){
 	
-	if(typeof(e)!="undefined"){
+	if(typeof(e) != "undefined"){
 		if(e.shiftKey)
-			var shifted=true;
+			var shifted = true;
 		else
-			var shifted=false
+			var shifted = false
 	}
 	else{
-		var shifted =false
+		var shifted = false
 	}
 	
 	if(FRAIS.activePoint.isSet && !shifted ){			
@@ -2737,7 +2706,7 @@ FRAIS.deactivatePoint= function(e){
 				}
 			}
 		}
-		if(typeof(FRAIS.newNeighbours)!="undefined"){
+		if(typeof(FRAIS.newNeighbours) != "undefined"){
 			for(var j in FRAIS.newNeighbours){
 				if(FRAIS.wayPoints[FRAIS.newNeighbours[j]].SVGElem!=null){
 					FRAIS.wayPoints[FRAIS.newNeighbours[j]].SVGElem.setAttributeNS(null,"stroke","black");
@@ -2746,14 +2715,16 @@ FRAIS.deactivatePoint= function(e){
 			delete FRAIS.newNeighbours;
 		}
 		FRAIS.activePoint.id=null;
-		$("main").removeChild($("pointInfo"));				
+		$("#main").get(0).removeChild($("#pointInfo").get(0));				
 	}
 			
 }
 			
 //Function for selecting a waypoint and show its attribute-box	
 FRAIS.selectPoint= function(e){
-	if(!e)e=window.event;
+	if(!e){
+		e=window.event;
+	}
 	if (!e.shiftKey) {
 		if (FRAIS.activePoint.isSet) 
 			FRAIS.deactivatePoint();
@@ -2774,7 +2745,7 @@ FRAIS.selectPoint= function(e){
 		pointInfo.id = "pointInfo"
 		pointInfo.name = "pointInfo"
 		pointInfo.style.position = "absolute";
-		pointInfo.style.left = (left + parseInt($("SVGObject" + FRAIS.activeLayer.id).width.match(/[0-9]+/g)) + 20) + "px";
+		pointInfo.style.left = (left + parseInt($("#SVGObject" + FRAIS.activeLayer.id).get(0).width.match(/[0-9]+/g)) + 20) + "px";
 		pointInfo.style.top = top + "px";
 		pointInfo.width = "auto";
 		pointInfo.style.zIndex = FRAIS.layers[FRAIS.activeLayer.id].elem.style.zIndex;
@@ -3013,7 +2984,7 @@ FRAIS.selectPoint= function(e){
 		pointInfo.appendChild(descList);
 		pointInfo.appendChild(changeList);
 			
-		$("main").appendChild(pointInfo);
+		$("#main").get(0).appendChild(pointInfo);
 		
 		if (e.currentTarget.getAttributeNS(null, "cx") == FRAIS.displayedXCoordinate(FRAIS.wayPoints[FRAIS.activePoint.id].x) && e.currentTarget.getAttributeNS(null, "cy") == FRAIS.displayedYCoordinate(FRAIS.wayPoints[FRAIS.activePoint.id].y)) {
 			FRAIS.hideResetPointPosition();
@@ -3028,11 +2999,11 @@ FRAIS.selectPoint= function(e){
 
 //Function for resetting the position of a point
 FRAIS.resetPointPosition= function(){
-	var point=FRAIS.wayPoints[parseInt($('inputPointID').value)];
+	var point=FRAIS.wayPoints[parseInt($('#inputPointID').val())];
 		point.SVGElem.setAttributeNS(null,"cx",FRAIS.displayedXCoordinate(point.x));
 		point.SVGElem.setAttributeNS(null,"cy",FRAIS.displayedYCoordinate(point.y));
-		$("inputX").value= FRAIS.wayPoints[FRAIS.activePoint.id].x;
-		$("inputY").value= FRAIS.wayPoints[FRAIS.activePoint.id].y;
+		$("#inputX").val(FRAIS.wayPoints[FRAIS.activePoint.id].x);
+		$("#inputY").val(FRAIS.wayPoints[FRAIS.activePoint.id].y);
 		//$(resetItem).hide();
 		FRAIS.hideResetPointPosition();
 		//$("changeList").removeChild(resetItem);
@@ -3040,13 +3011,13 @@ FRAIS.resetPointPosition= function(){
 }
 //Show the button for resetting the position of a point
 FRAIS.showResetPointPosition= function(){
-	if($("resetItem")!=null)
-		$("resetItem").style.display="";
+	if($("#resetItem").length)
+		$("#resetItem").get(0).style.display="";
 }
 //Hide the button for resetting the position of a point
 FRAIS.hideResetPointPosition= function(){
-	if($("resetItem")!=null)
-		$("resetItem").style.display="none";
+	if($("#resetItem").length)
+		$("#resetItem").get(0).style.display="none";
 }
 //Function for adding / removing neighbours of a waypoint
 FRAIS.toggleNeighbour= function(e){
@@ -3064,9 +3035,9 @@ FRAIS.toggleNeighbour= function(e){
 				wayPoints[activePoint.id].removeNeighbour(e.currentTarget.getAttributeNS(null,"id"));
 				
 			}*/
-			if($("np"+e.currentTarget.getAttributeNS(null,"id")+"Item")!=null){
-				var descList=$("descList");
-				var npItem= $("np"+e.currentTarget.getAttributeNS(null,"id")+"Item");
+			if($("#np"+e.currentTarget.getAttributeNS(null,"id")+"Item").length){
+				var descList=$("#descList").get(0);
+				var npItem= $("#np"+e.currentTarget.getAttributeNS(null,"id")+"Item").get(0);
 				descList.removeChild(npItem);
 				e.currentTarget.setAttributeNS(null,"stroke","black");
 				//wayPoints[activePoint.id].removeNeighbour(e.currentTarget.getAttributeNS(null,"id"));
@@ -3077,7 +3048,7 @@ FRAIS.toggleNeighbour= function(e){
 			}
 // add the clicked neighbour to the active point
 			else{
-				var descList = $("descList");
+				var descList = $("#descList").get(0);
 				var np_id = e.currentTarget.getAttributeNS(null,"id");
 				e.currentTarget.setAttributeNS(null,"stroke","orange");
 				FRAIS.newNeighbours["np"+np_id]=np_id;
@@ -3129,16 +3100,13 @@ FRAIS.addPoint= function(e){
 				var building= FRAIS.activeBuilding;
 				var project= FRAIS.activeProject;
 				
-				var MyAjax = new Ajax.Request('php/addPoint.php', {
-					method: 'post',
-					parameters: {
+				$.post('php/addPoint.php', {
 					levelId: level,
 					projectId: project,
 					buildingId: building,
-					pointId:++FRAIS.maxPointId,
+					pointId: ++FRAIS.maxPointId,
 					pointX:	FRAIS.realXCoordinate(e.clientX),
 					pointY: FRAIS.realYCoordinate(e.clientY)
-					}
 				});
 				
 			/*	if (typeof(maxID) == "undefined"){
@@ -3176,7 +3144,7 @@ FRAIS.addPoint= function(e){
 //Function for updating a waypoint in the database
 FRAIS.updatePoint= function(){
 	
-	var descList=$("descList");
+	var descList=$("#descList").get(0);
 	var level= FRAIS.layers[FRAIS.activeLayer.id].level;
 	var building= FRAIS.activeBuilding;
 	var project= FRAIS.activeProject;
@@ -3195,20 +3163,17 @@ FRAIS.updatePoint= function(){
 	}
 	if (x.match(/^[0-9]+$/) && y.match(/^[0-9]+$/) && type.match(/^[A-Z]{2}$/)) {
 		if ((dest && desc != '')|| !dest) {
-			var MyAjax = new Ajax.Request('php/updatePoint.php', {
-				method: 'post',
-				parameters: {
-					levelId: level,
-					projectId: project,
-					buildingId: building,
-					pointId: id,
-					pointX: x,
-					pointY: y,
-					pointArt: type,
-					pointDesc: desc,
-					pointDest: dest,
-					pointNPs: NPs
-				}
+			$.post('php/updatePoint.php', {
+				levelId: level,
+				projectId: project,
+				buildingId: building,
+				pointId: id,
+				pointX: x,
+				pointY: y,
+				pointArt: type,
+				pointDesc: desc,
+				pointDest: dest,
+				pointNPs: NPs
 			});
 		}
 		else{
@@ -3222,58 +3187,54 @@ FRAIS.updatePoint= function(){
 }	
 //Function for showing the button for saving the changes of a point
 FRAIS.showUpdatePoint= function(){
-	$("updateItem").style.display="";
+	// TODO
+	$("#updateItem").css({display: ""});
 }
 //Function for showing the button for saving the changes of a point
 FRAIS.hideUpdatePoint = function(){
-	$("updateItem").style.display = "none";
+	// TODO
+	$("#updateItem").css({display: "none"});
 }
 //Function for loading the nav bar for a search
 FRAIS.loadNavBar= function(){
-
-	var MyAjax = new Ajax.Request('php/loadSystem.php', {
-				method: 'post'
-			});
+	$.post('php/loadSystem.php')
 }
 //Function for creating 2 select items with all available start and destination points
 FRAIS.loadDestinations= function(){
-	var navBarSelectItemA=$("navBarSelectItemA");
-	//if (navBarSelectItemB != null) {
+
+	var navBarSelectItemA=$("#navBarSelectItemA").get(0);
+
+//	if (navBarSelectItemB != null) {
 		for (var i = 1; i < navBarSelectItemA.childNodes.length; i++) {
 			navBarSelectItemA.removeChild(navBarSelectItemA.childNodes[i]);
 		}
 		FRAIS.resetMain();
 	//}
-	var navBarSelectA=$("navBarSelectA");
-	if(navBarSelectA!=null){
-		var project= $("navBarSelectA").value;
+	var navBarSelectA=$("#navBarSelectA");
+
+	if(navBarSelectA.length){
+		var project= navBarSelectA.val();
+
 		if(project!=0){
-			var MyAjax = new Ajax.Request('php/loadDestinations.php', {
-				method: 'post',
-				parameters: {
-					projectId: project
-				}
-			});
+			$.post('php/loadDestinations.php', { projectId: project });
 		}
 	}
 }
 //Function for executing a search
 FRAIS.search =function(){
 	FRAIS.resetMain();
-	var start=$("navBarSelectBStart");
-	var dest=$("navBarSelectBDest");
-	if(start != null && dest != null){
-		start=$("navBarSelectBStart").value;
-		dest=$("navBarSelectBDest").value;
+	var start=$("#navBarSelectBStart");
+	var dest=$("#navBarSelectBDest");
+	if(start.length && dest.length){
+		start = start.val();
+		dest = dest.val();
 		if (start != 0 && dest != 0) {
 			if (start != dest) {
-				var MyAjax = new Ajax.Request('php/search.php', {
-					method: 'post',
-					parameters: {
-						startId: start,
-						destId: dest
-					}
-				});
+				$.post('php/search.php', {
+					startId: start,
+					destId: dest
+				})
+				
 			}
 			else {
 				alert("Der ausgewaehlte Startpunkt stimmt mit dem Zielpunkt ueberein!");
@@ -3282,7 +3243,4 @@ FRAIS.search =function(){
 			alert("Es wurde kein Start- oder Zielpunkt ausgewaehlt!");
 		}
 	}
-
-
-}
-			
+}			
